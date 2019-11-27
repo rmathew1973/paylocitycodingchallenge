@@ -25,19 +25,19 @@ namespace CodingChallenge.Business.UnitTests
         {
             var employee = GetEmployee(1);
 
-            var payPerPeriod = Math.Round(AppConstants.DefaultPayPerPeriod, 2, MidpointRounding.ToEven);
+            var payPerPeriod = round(AppConstants.DefaultPayPerPeriod);
 
-            var payPerYear = Math.Round(payPerPeriod * AppConstants.NumberOfPayPeriods, 2, MidpointRounding.ToEven);
+            var payPerYear = round(payPerPeriod * AppConstants.NumberOfPayPeriods);
 
-            var dependentTotalCostPerYear = Math.Round(AppConstants.DependentCost, 2, MidpointRounding.ToEven);
+            var dependentTotalCostPerYear = round(AppConstants.DependentCost);
 
-            var employeeTotalCostPerYear = Math.Round(AppConstants.EmployeeCost, 2, MidpointRounding.ToEven);
+            var employeeTotalCostPerYear = round(AppConstants.EmployeeCost);
 
             var employeeAndDependentsTotalCostPerYear = dependentTotalCostPerYear + employeeTotalCostPerYear;
 
-            var employeeTotalCostPerPayPeriod = Math.Round(employeeTotalCostPerYear / AppConstants.NumberOfPayPeriods, 2, MidpointRounding.ToEven);
+            var employeeTotalCostPerPayPeriod = round(employeeTotalCostPerYear / AppConstants.NumberOfPayPeriods);
 
-            var dependentTotalCostPerPeriod = Math.Round(dependentTotalCostPerYear / AppConstants.NumberOfPayPeriods, 2, MidpointRounding.ToEven);
+            var dependentTotalCostPerPeriod = round(dependentTotalCostPerYear / AppConstants.NumberOfPayPeriods);
 
             var employeeAndDependentsTotalCostPerPayPeriod = employeeTotalCostPerPayPeriod + dependentTotalCostPerPeriod;
 
@@ -79,19 +79,19 @@ namespace CodingChallenge.Business.UnitTests
 
             employee.Dependents.First().FirstName = AppConstants.FirstLetterDiscountLetter;
 
-            var payPerPeriod = Math.Round(AppConstants.DefaultPayPerPeriod, 2, MidpointRounding.ToEven);
+            var payPerPeriod = round(AppConstants.DefaultPayPerPeriod);
 
-            var payPerYear = Math.Round(payPerPeriod * AppConstants.NumberOfPayPeriods, 2, MidpointRounding.ToEven);
+            var payPerYear = round(payPerPeriod * AppConstants.NumberOfPayPeriods);
 
-            var dependentTotalCostPerYear = Math.Round(AppConstants.DependentCost * AppConstants.FirstLetterDiscountAmount, 2, MidpointRounding.ToEven);
+            var dependentTotalCostPerYear = round(AppConstants.DependentCost * AppConstants.FirstLetterDiscountAmount);
 
-            var employeeTotalCostPerYear = Math.Round(AppConstants.EmployeeCost * AppConstants.FirstLetterDiscountAmount, 2, MidpointRounding.ToEven);
+            var employeeTotalCostPerYear = round(AppConstants.EmployeeCost * AppConstants.FirstLetterDiscountAmount);
 
             var employeeAndDependentsTotalCostPerYear = dependentTotalCostPerYear + employeeTotalCostPerYear;
 
-            var employeeTotalCostPerPayPeriod = Math.Round(employeeTotalCostPerYear / AppConstants.NumberOfPayPeriods, 2, MidpointRounding.ToEven);
+            var employeeTotalCostPerPayPeriod = round(employeeTotalCostPerYear / AppConstants.NumberOfPayPeriods);
 
-            var dependentTotalCostPerPeriod = Math.Round(dependentTotalCostPerYear / AppConstants.NumberOfPayPeriods, 2, MidpointRounding.ToEven);
+            var dependentTotalCostPerPeriod = round(dependentTotalCostPerYear / AppConstants.NumberOfPayPeriods);
 
             var employeeAndDependentsTotalCostPerPayPeriod = employeeTotalCostPerPayPeriod + dependentTotalCostPerPeriod;
 
@@ -153,6 +153,11 @@ namespace CodingChallenge.Business.UnitTests
                                     }
                                 }
             };
+        }
+
+        private decimal round(decimal amount)
+        {
+            return Math.Round(amount, 2, MidpointRounding.ToEven);
         }
     }
 }

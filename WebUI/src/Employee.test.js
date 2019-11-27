@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Employee from './Employee';
+import Employee from './employee/Employee';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');

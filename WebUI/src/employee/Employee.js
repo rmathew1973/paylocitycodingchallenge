@@ -4,6 +4,7 @@ import ReactTable from 'react-table';
 import { Redirect } from 'react-router-dom';
 import { FiDelete } from 'react-icons/fi';
 import bankersRounding from 'bankers-rounding';
+import { calculateCosts, pay, numberOfPaychecks, employeeBenefitCost } from './Calculator';
 import Errors from '../modals/Errors';
 import DeleteConfirm from '../modals/DeleteConfirm';
 import AddDependent from './AddDependent';
@@ -12,13 +13,6 @@ import { EmployeeUrl } from '../Urls';
 import 'react-table/react-table.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Employee.css';
-
-const pay = 2000;
-const numberOfPaychecks = 26;
-const employeeBenefitCost = 1000;
-const dependentBenefitCost = 500;
-const nameDiscount = 0.9;
-const letterToDiscount = 'A';
 
 class Employee extends Component {
 
@@ -125,7 +119,6 @@ class Employee extends Component {
     this.deleteDependent = this.deleteDependent.bind(this);
     this.closeDelete = this.closeDelete.bind(this);
     this.confirmDelete = this.confirmDelete.bind(this);
-    this.calculateCosts = this.calculateCosts.bind(this);
     this.validateDependent = this.validateDependent.bind(this);
     this.employeeChangeHandler = this.employeeChangeHandler.bind(this);
     this.dependentChangeHandler = this.dependentChangeHandler.bind(this);
@@ -210,35 +203,6 @@ class Employee extends Component {
     return true;
   }
 
-  //Helper to calculate costs and populate properties on employee record
-  calculateCosts(employee) {
-    if (employee.firstName.toUpperCase().split('').shift() === letterToDiscount) {
-      employee.employeeTotalCostPerYear = bankersRounding(employeeBenefitCost * nameDiscount, 2);
-    } else {
-      employee.employeeTotalCostPerYear = bankersRounding(employeeBenefitCost, 2);
-    }
-
-    employee.employeeTotalCostPerPayPeriod = bankersRounding(employee.employeeTotalCostPerYear / numberOfPaychecks, 2);
-
-    employee.employeeAndDependentsTotalCostPerPayPeriod = employee.employeeTotalCostPerPayPeriod;
-
-    employee.employeeAndDependentsTotalCostPerYear = employee.employeeTotalCostPerYear;
-
-    employee.dependents.forEach(x => {
-      if (x.firstName.toUpperCase().split('').shift() === letterToDiscount) {
-        x.dependentTotalCostPerYear = bankersRounding(dependentBenefitCost * nameDiscount, 2);
-      } else {
-        x.dependentTotalCostPerYear = bankersRounding(dependentBenefitCost, 2);
-      }
-
-      x.dependentTotalCostPerPayPeriod = bankersRounding(x.dependentTotalCostPerYear / numberOfPaychecks, 2);
-
-      employee.employeeAndDependentsTotalCostPerPayPeriod += x.dependentTotalCostPerPayPeriod;
-
-      employee.employeeAndDependentsTotalCostPerYear += x.dependentTotalCostPerYear;
-    });
-  }
-
   //Add dependent to collection after validation.
   saveDependent() {
     //Validate all required fields.
@@ -261,7 +225,7 @@ class Employee extends Component {
       employee.dependents = dependents;
 
       //Calculate cost
-      this.calculateCosts(employee);
+      calculateCosts(employee);
 
       this.setState({ employee: employee });
 
@@ -289,7 +253,7 @@ class Employee extends Component {
 
     this.setState({ employee: employee });
 
-    this.calculateCosts(employee);
+    calculateCosts(employee);
 
     //Call close delete modal
     this.closeDelete();
@@ -364,7 +328,7 @@ class Employee extends Component {
     } else {
       employee[evt.target.name] = evt.target.value;
     }
-    this.calculateCosts(employee);
+    calculateCosts(employee);
     this.setState({ employee: employee });
   }
 

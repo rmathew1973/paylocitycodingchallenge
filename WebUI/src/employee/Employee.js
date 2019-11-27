@@ -78,14 +78,14 @@ class Employee extends Component {
       id: 0,
       firstName: '',
       lastName: '',
-      employeeTotalCostPerPayPeriod: employeeBenefitCost / numberOfPaychecks,
-      employeeTotalCostPerYear: employeeBenefitCost,
-      employeeAndDependentsTotalCostPerPayPeriod: employeeBenefitCost / numberOfPaychecks,
-      employeeAndDependentsTotalCostPerYear: employeeBenefitCost,
-      payPerPeriod: pay,
-      payPerYear: pay * numberOfPaychecks,
-      netPayPerPeriod: pay - (employeeBenefitCost / numberOfPaychecks),
-      netPayPerYear: (pay * numberOfPaychecks) - employeeBenefitCost,
+      employeeTotalCostPerPayPeriod: bankersRounding(employeeBenefitCost / numberOfPaychecks, 2),
+      employeeTotalCostPerYear: bankersRounding(employeeBenefitCost, 2),
+      employeeAndDependentsTotalCostPerPayPeriod: bankersRounding(employeeBenefitCost / numberOfPaychecks, 2),
+      employeeAndDependentsTotalCostPerYear: bankersRounding(employeeBenefitCost, 2),
+      payPerPeriod: bankersRounding(pay, 2),
+      payPerYear: bankersRounding(pay * numberOfPaychecks, 2),
+      netPayPerPeriod: bankersRounding(pay - bankersRounding(employeeBenefitCost / numberOfPaychecks, 2), 2),
+      netPayPerYear: bankersRounding(bankersRounding(pay * numberOfPaychecks, 2) - employeeBenefitCost, 2),
       dependents: []
     };
 

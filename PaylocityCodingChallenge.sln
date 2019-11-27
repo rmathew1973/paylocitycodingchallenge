@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenge.Api", "CodingChallenge.Api\CodingChallenge.Api.csproj", "{E260DBCF-92BC-46D9-90FD-F213AF9CF6E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenge.Business", "CodingChallenge.Business\CodingChallenge.Business.csproj", "{755BE644-C164-4273-A593-5712540B0411}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenge.Repository", "CodingChallenge.Repository\CodingChallenge.Repository.csproj", "{166EBAA4-0DCD-4B14-B220-E80A1AB99AE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E260DBCF-92BC-46D9-90FD-F213AF9CF6E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E260DBCF-92BC-46D9-90FD-F213AF9CF6E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E260DBCF-92BC-46D9-90FD-F213AF9CF6E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E260DBCF-92BC-46D9-90FD-F213AF9CF6E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{755BE644-C164-4273-A593-5712540B0411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{755BE644-C164-4273-A593-5712540B0411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{755BE644-C164-4273-A593-5712540B0411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{755BE644-C164-4273-A593-5712540B0411}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166EBAA4-0DCD-4B14-B220-E80A1AB99AE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166EBAA4-0DCD-4B14-B220-E80A1AB99AE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166EBAA4-0DCD-4B14-B220-E80A1AB99AE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166EBAA4-0DCD-4B14-B220-E80A1AB99AE9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

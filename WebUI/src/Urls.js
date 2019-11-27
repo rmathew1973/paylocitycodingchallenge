@@ -1,0 +1,1 @@
+export const EmployeeUrl = 'https://localhost:5001/_api/employees';

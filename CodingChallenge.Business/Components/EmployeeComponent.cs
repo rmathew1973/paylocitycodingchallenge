@@ -27,11 +27,11 @@ namespace CodingChallenge.Business.Components
 
         public async Task<Employee> AddEmployeeAsync(Employee employee)
         {
+            PayAndBenifitCalculator.PopulateEmployeePay(employee);
+
             PayAndBenifitCalculator.PopulateBenifitCost(employee);
 
             _employeeValidator.ValidateAndThrow(employee);
-
-            PayAndBenifitCalculator.PopulateEmployeePay(employee);
 
             var result = await _repository.AddEmployeeAsync(_mapper.Map<Repository.Models.Employee>(employee));
 
@@ -59,11 +59,11 @@ namespace CodingChallenge.Business.Components
 
         public async Task<int> UpdateEmployeeAsync(Employee employee)
         {
+            PayAndBenifitCalculator.PopulateEmployeePay(employee);
+
             PayAndBenifitCalculator.PopulateBenifitCost(employee);
 
             _employeeValidator.ValidateAndThrow(employee);
-
-            PayAndBenifitCalculator.PopulateEmployeePay(employee);
 
             return await _repository.UpdateEmployeeAsync(_mapper.Map<Repository.Models.Employee>(employee));
         }

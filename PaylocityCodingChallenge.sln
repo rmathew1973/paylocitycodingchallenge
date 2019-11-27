@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenge.Business", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenge.Repository", "CodingChallenge.Repository\CodingChallenge.Repository.csproj", "{166EBAA4-0DCD-4B14-B220-E80A1AB99AE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenge.Api.UnitTests", "CodingChallenge.Api.UnitTests\CodingChallenge.Api.UnitTests.csproj", "{C22546C8-E7DB-4A55-80B6-014A23829E54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenge.Business.UnitTests", "CodingChallenge.Business.UnitTests\CodingChallenge.Business.UnitTests.csproj", "{AE91940A-E430-4028-8A2E-F6B767953AF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenge.Repository.UnitTests", "CodingChallenge.Repository.UnitTests\CodingChallenge.Repository.UnitTests.csproj", "{63288146-60C0-4712-828E-4FC5DCBD9A55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,5 +31,17 @@ Global
 		{166EBAA4-0DCD-4B14-B220-E80A1AB99AE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{166EBAA4-0DCD-4B14-B220-E80A1AB99AE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{166EBAA4-0DCD-4B14-B220-E80A1AB99AE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C22546C8-E7DB-4A55-80B6-014A23829E54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C22546C8-E7DB-4A55-80B6-014A23829E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C22546C8-E7DB-4A55-80B6-014A23829E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C22546C8-E7DB-4A55-80B6-014A23829E54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE91940A-E430-4028-8A2E-F6B767953AF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE91940A-E430-4028-8A2E-F6B767953AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE91940A-E430-4028-8A2E-F6B767953AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE91940A-E430-4028-8A2E-F6B767953AF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63288146-60C0-4712-828E-4FC5DCBD9A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63288146-60C0-4712-828E-4FC5DCBD9A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63288146-60C0-4712-828E-4FC5DCBD9A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63288146-60C0-4712-828E-4FC5DCBD9A55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

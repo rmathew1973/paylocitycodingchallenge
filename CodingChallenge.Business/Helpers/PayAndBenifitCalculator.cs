@@ -11,12 +11,9 @@ namespace CodingChallenge.Business.Helpers
             {
                 employee.PayPerPeriod = AppConstants.DefaultPayPerPeriod;
             }
+            employee.PayPerPeriod = Math.Round(employee.PayPerPeriod, 2, MidpointRounding.ToEven);
 
-            employee.PayPerYear = employee.PayPerPeriod * AppConstants.NumberOfPayPeriods;
-
-            employee.NetPayPerPeriod = employee.PayPerPeriod - employee.EmployeeAndDependentsTotalCostPerPayPeriod;
-
-            employee.NetPayPerYear = employee.PayPerYear - employee.EmployeeAndDependentsTotalCostPerYear;
+            employee.PayPerYear = Math.Round(employee.PayPerPeriod * AppConstants.NumberOfPayPeriods, 2, MidpointRounding.ToEven);
         }
 
         public static void PopulateBenifitCost(Employee employee)
@@ -27,32 +24,36 @@ namespace CodingChallenge.Business.Helpers
 
             foreach (var dependent in employee.Dependents)
             {
-                dependent.DependentTotalCostPerYear = AppConstants.DependentCost;
+                dependent.DependentTotalCostPerYear = Math.Round(AppConstants.DependentCost, 2, MidpointRounding.ToEven);
 
                 if (dependent.FirstName.StartsWith(AppConstants.FirstLetterDiscountLetter, StringComparison.OrdinalIgnoreCase))
                 {
-                    dependent.DependentTotalCostPerYear = AppConstants.DependentCost * AppConstants.FirstLetterDiscountAmount;
+                    dependent.DependentTotalCostPerYear = Math.Round(AppConstants.DependentCost * AppConstants.FirstLetterDiscountAmount, 2, MidpointRounding.ToEven);
                 }
 
-                dependent.DependentTotalCostPerPayPeriod = dependent.DependentTotalCostPerYear / AppConstants.NumberOfPayPeriods;
+                dependent.DependentTotalCostPerPayPeriod = Math.Round(dependent.DependentTotalCostPerYear / AppConstants.NumberOfPayPeriods, 2, MidpointRounding.ToEven);
 
-                employee.EmployeeAndDependentsTotalCostPerPayPeriod += dependent.DependentTotalCostPerPayPeriod;
+                employee.EmployeeAndDependentsTotalCostPerPayPeriod += Math.Round(dependent.DependentTotalCostPerPayPeriod, 2, MidpointRounding.ToEven);
 
-                employee.EmployeeAndDependentsTotalCostPerYear += dependent.DependentTotalCostPerYear;
+                employee.EmployeeAndDependentsTotalCostPerYear += Math.Round(dependent.DependentTotalCostPerYear, 2, MidpointRounding.ToEven);
             }
 
-            employee.EmployeeTotalCostPerYear = AppConstants.EmployeeCost;
+            employee.EmployeeTotalCostPerYear = Math.Round(AppConstants.EmployeeCost, 2, MidpointRounding.ToEven);
 
             if (employee.FirstName.StartsWith(AppConstants.FirstLetterDiscountLetter, StringComparison.OrdinalIgnoreCase))
             {
-                employee.EmployeeTotalCostPerYear = AppConstants.EmployeeCost * AppConstants.FirstLetterDiscountAmount;
+                employee.EmployeeTotalCostPerYear = Math.Round(AppConstants.EmployeeCost * AppConstants.FirstLetterDiscountAmount, 2, MidpointRounding.ToEven);
             }
 
-            employee.EmployeeTotalCostPerPayPeriod = employee.EmployeeTotalCostPerYear / AppConstants.NumberOfPayPeriods;
+            employee.EmployeeTotalCostPerPayPeriod = Math.Round(employee.EmployeeTotalCostPerYear / AppConstants.NumberOfPayPeriods, 2, MidpointRounding.ToEven);
 
-            employee.EmployeeAndDependentsTotalCostPerPayPeriod += employee.EmployeeTotalCostPerPayPeriod;
+            employee.EmployeeAndDependentsTotalCostPerPayPeriod = Math.Round(employee.EmployeeTotalCostPerPayPeriod + employee.EmployeeAndDependentsTotalCostPerPayPeriod, 2, MidpointRounding.ToEven);
 
-            employee.EmployeeAndDependentsTotalCostPerYear += employee.EmployeeTotalCostPerYear;
+            employee.EmployeeAndDependentsTotalCostPerYear = Math.Round(employee.EmployeeTotalCostPerYear + employee.EmployeeAndDependentsTotalCostPerYear, 2, MidpointRounding.ToEven);
+
+            employee.NetPayPerPeriod = Math.Round(employee.PayPerPeriod - employee.EmployeeAndDependentsTotalCostPerPayPeriod, 2, MidpointRounding.ToEven);
+
+            employee.NetPayPerYear = Math.Round(employee.PayPerYear - employee.EmployeeAndDependentsTotalCostPerYear, 2, MidpointRounding.ToEven);
         }
     }
 }

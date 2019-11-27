@@ -3,6 +3,7 @@ import { Button, Navbar, Nav } from 'react-bootstrap';
 import ReactTable from 'react-table';
 import { Redirect } from 'react-router-dom';
 import { FiDelete } from 'react-icons/fi';
+import bankersRounding from 'bankers-rounding';
 import Errors from '../modals/Errors';
 import DeleteConfirm from '../modals/DeleteConfirm';
 import AddDependent from './AddDependent';
@@ -212,12 +213,12 @@ class Employee extends Component {
   //Helper to calculate costs and populate properties on employee record
   calculateCosts(employee) {
     if (employee.firstName.toUpperCase().split('').shift() === letterToDiscount) {
-      employee.employeeTotalCostPerYear = employeeBenefitCost * nameDiscount;
+      employee.employeeTotalCostPerYear = bankersRounding(employeeBenefitCost * nameDiscount, 2);
     } else {
-      employee.employeeTotalCostPerYear = employeeBenefitCost;
+      employee.employeeTotalCostPerYear = bankersRounding(employeeBenefitCost, 2);
     }
 
-    employee.employeeTotalCostPerPayPeriod = employee.employeeTotalCostPerYear / numberOfPaychecks;
+    employee.employeeTotalCostPerPayPeriod = bankersRounding(employee.employeeTotalCostPerYear / numberOfPaychecks, 2);
 
     employee.employeeAndDependentsTotalCostPerPayPeriod = employee.employeeTotalCostPerPayPeriod;
 
@@ -225,12 +226,12 @@ class Employee extends Component {
 
     employee.dependents.forEach(x => {
       if (x.firstName.toUpperCase().split('').shift() === letterToDiscount) {
-        x.dependentTotalCostPerYear = dependentBenefitCost * nameDiscount;
+        x.dependentTotalCostPerYear = bankersRounding(dependentBenefitCost * nameDiscount, 2);
       } else {
-        x.dependentTotalCostPerYear = dependentBenefitCost;
+        x.dependentTotalCostPerYear = bankersRounding(dependentBenefitCost, 2);
       }
 
-      x.dependentTotalCostPerPayPeriod = x.dependentTotalCostPerYear / numberOfPaychecks;
+      x.dependentTotalCostPerPayPeriod = bankersRounding(x.dependentTotalCostPerYear / numberOfPaychecks, 2);
 
       employee.employeeAndDependentsTotalCostPerPayPeriod += x.dependentTotalCostPerPayPeriod;
 

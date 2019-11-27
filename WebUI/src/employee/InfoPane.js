@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, FormLabel, Form } from 'react-bootstrap';
+import bankersRounding from 'bankers-rounding';
 
 class InfoPane extends Component {
 	constructor(props) {
@@ -72,9 +73,9 @@ class InfoPane extends Component {
 						<br />
 						<FormLabel>Total Calculated Deduction Per Year: ${this.props.totalAmountDeductedPerYear.toFixed(2)}</FormLabel>
 						<br />
-						<FormLabel>Total Gross Pay Per Year: ${(this.props.payPerPeriod * this.props.numberOfPaychecks).toFixed(2)}</FormLabel>
+						<FormLabel>Total Gross Pay Per Year: ${bankersRounding(this.props.payPerPeriod * this.props.numberOfPaychecks, 2).toFixed(2)}</FormLabel>
 						<br />
-						<FormLabel>Total Net Pay Per Year: ${((this.props.payPerPeriod * this.props.numberOfPaychecks) - this.props.totalAmountDeductedPerYear).toFixed(2)}</FormLabel>
+						<FormLabel>Total Net Pay Per Year: ${bankersRounding(bankersRounding(this.props.payPerPeriod * this.props.numberOfPaychecks, 2) - this.props.totalAmountDeductedPerYear, 2).toFixed(2)}</FormLabel>
 					</Col>
 					<Col size={6}>
 						<FormLabel>Employee Cost Per Period: ${this.props.employeeTotalCostPerPayPeriod.toFixed(2)}</FormLabel>
@@ -83,7 +84,7 @@ class InfoPane extends Component {
 						<br />
 						<FormLabel>Total Gross Pay Per Pay Period: ${this.props.payPerPeriod.toFixed(2)}</FormLabel>
 						<br />
-						<FormLabel>Total Net Pay Per Pay Period: ${(this.props.payPerPeriod - this.props.totalAmountDeductedPerPeriod).toFixed(2)}</FormLabel>
+						<FormLabel>Total Net Pay Per Pay Period: ${bankersRounding(this.props.payPerPeriod - this.props.totalAmountDeductedPerPeriod, 2).toFixed(2)}</FormLabel>
 					</Col>
 				</Row>
 			</>

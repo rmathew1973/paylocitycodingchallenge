@@ -16,6 +16,7 @@ namespace CodingChallenge.Api.Bootstrap
                 .ForMember(dest => dest.PayPerYear, opt => opt.Ignore())
                 .ForMember(dest => dest.NetPayPerPeriod, opt => opt.Ignore())
                 .ForMember(dest => dest.NetPayPerYear, opt => opt.Ignore())
+                .ForMember(dest => dest.LessCostForLastPayPeriod, opt => opt.Ignore())
                 .ReverseMap();
 
             CreateMap<DependentInputModel, Dependent>()

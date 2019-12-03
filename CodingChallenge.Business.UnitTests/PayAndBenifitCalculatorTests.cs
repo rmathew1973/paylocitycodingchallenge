@@ -45,6 +45,8 @@ namespace CodingChallenge.Business.UnitTests
 
             var netPayPerPeriod = payPerPeriod - employeeAndDependentsTotalCostPerPayPeriod;
 
+            var lessCostForLastPayPeriod = round((round(employeeTotalCostPerPayPeriod * AppConstants.NumberOfPayPeriods) - employeeTotalCostPerYear) + (round(dependentTotalCostPerPeriod * AppConstants.NumberOfPayPeriods) - dependentTotalCostPerYear));
+
             PayAndBenifitCalculator.PopulateEmployeePay(employee);
 
             PayAndBenifitCalculator.PopulateBenifitCost(employee);
@@ -65,9 +67,11 @@ namespace CodingChallenge.Business.UnitTests
 
             employee.NetPayPerYear.Should().Be(netPayPerYear);
 
+            employee.LessCostForLastPayPeriod.Should().Be(lessCostForLastPayPeriod);
+
             employee.Dependents.First().DependentTotalCostPerPayPeriod.Should().Be(dependentTotalCostPerPeriod);
 
-            employee.Dependents.First().DependentTotalCostPerYear.Should().Be(dependentTotalCostPerYear);
+            employee.Dependents.First().DependentTotalCostPerYear.Should().Be(dependentTotalCostPerYear);   
         }
 
         [Test]
@@ -99,6 +103,8 @@ namespace CodingChallenge.Business.UnitTests
 
             var netPayPerPeriod = payPerPeriod - employeeAndDependentsTotalCostPerPayPeriod;
 
+            var lessCostForLastPayPeriod = round((round(employeeTotalCostPerPayPeriod * AppConstants.NumberOfPayPeriods) - employeeTotalCostPerYear) + (round(dependentTotalCostPerPeriod * AppConstants.NumberOfPayPeriods) - dependentTotalCostPerYear));
+
             PayAndBenifitCalculator.PopulateEmployeePay(employee);
 
             PayAndBenifitCalculator.PopulateBenifitCost(employee);
@@ -118,6 +124,8 @@ namespace CodingChallenge.Business.UnitTests
             employee.NetPayPerPeriod.Should().Be(netPayPerPeriod);
 
             employee.NetPayPerYear.Should().Be(netPayPerYear);
+
+            employee.LessCostForLastPayPeriod.Should().Be(lessCostForLastPayPeriod);
 
             employee.Dependents.First().DependentTotalCostPerPayPeriod.Should().Be(dependentTotalCostPerPeriod);
 

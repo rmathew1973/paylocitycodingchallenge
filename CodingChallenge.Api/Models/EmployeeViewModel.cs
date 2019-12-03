@@ -26,6 +26,8 @@ namespace CodingChallenge.Api.Models
 
         public decimal NetPayPerYear { get; set; }
 
+        public decimal LessCostForLastPayPeriod { get; set; }
+
         public virtual ICollection<DependentViewModel> Dependents { get; set; }
     }
 }

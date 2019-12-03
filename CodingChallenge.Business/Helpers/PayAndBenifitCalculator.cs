@@ -39,7 +39,7 @@ namespace CodingChallenge.Business.Helpers
 
                 employee.EmployeeAndDependentsTotalCostPerYear += Math.Round(dependent.DependentTotalCostPerYear, 2, MidpointRounding.ToEven);
 
-                employee.LessCostForLastPayPeriod = employee.LessCostForLastPayPeriod + Math.Round((dependent.DependentTotalCostPerPayPeriod * AppConstants.NumberOfPayPeriods) - dependent.DependentTotalCostPerYear, 2, MidpointRounding.ToEven);
+                employee.LessCostForLastPayPeriod += Math.Round((dependent.DependentTotalCostPerPayPeriod * AppConstants.NumberOfPayPeriods) - dependent.DependentTotalCostPerYear, 2, MidpointRounding.ToEven);
             }
 
             employee.EmployeeTotalCostPerYear = Math.Round(AppConstants.EmployeeCost, 2, MidpointRounding.ToEven);
@@ -51,7 +51,7 @@ namespace CodingChallenge.Business.Helpers
 
             employee.EmployeeTotalCostPerPayPeriod = Math.Round(employee.EmployeeTotalCostPerYear / AppConstants.NumberOfPayPeriods, 2, MidpointRounding.ToEven);
 
-            employee.LessCostForLastPayPeriod = employee.LessCostForLastPayPeriod + Math.Round((employee.EmployeeTotalCostPerPayPeriod * AppConstants.NumberOfPayPeriods) - employee.EmployeeTotalCostPerYear, 2, MidpointRounding.ToEven);
+            employee.LessCostForLastPayPeriod += Math.Round((employee.EmployeeTotalCostPerPayPeriod * AppConstants.NumberOfPayPeriods) - employee.EmployeeTotalCostPerYear, 2, MidpointRounding.ToEven);
 
             employee.EmployeeAndDependentsTotalCostPerPayPeriod = Math.Round(employee.EmployeeTotalCostPerPayPeriod + employee.EmployeeAndDependentsTotalCostPerPayPeriod, 2, MidpointRounding.ToEven);
 

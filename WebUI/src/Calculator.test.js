@@ -15,6 +15,8 @@ it('calculates correct values', () => {
 
 	const dependentTotalCostPerYear = bankersRounding(dependentBenefitCost, 2);
 
+	const lessCostForLastPayPeriod = bankersRounding((employeeAndDependentsTotalCostPerPayPeriod * numberOfPaychecks) - employeeAndDependentsTotalCostPerYear, 2);
+
 	const calculatedEmployee = {
 		firstName: '',
 		lastName: '',
@@ -22,6 +24,7 @@ it('calculates correct values', () => {
 		employeeTotalCostPerYear: 0,
 		employeeAndDependentsTotalCostPerPayPeriod: 0,
 		employeeAndDependentsTotalCostPerYear: 0,
+		lessCostForLastPayPeriod: 0,
 		dependents: [{
 			firstName: '',
 			lastName: '',
@@ -43,6 +46,8 @@ it('calculates correct values', () => {
 	assert.equal(calculatedEmployee.dependents[0].dependentTotalCostPerPayPeriod, dependentTotalCostPerPayPeriod);
 
 	assert.equal(calculatedEmployee.dependents[0].dependentTotalCostPerYear, dependentTotalCostPerYear);
+
+	assert.equal(calculatedEmployee.lessCostForLastPayPeriod, lessCostForLastPayPeriod);
 });
 
 it('calculates correct values with discount', () => {
@@ -57,6 +62,8 @@ it('calculates correct values with discount', () => {
 	const dependentTotalCostPerPayPeriod = bankersRounding(bankersRounding(dependentBenefitCost * nameDiscount, 2) / numberOfPaychecks, 2);
 
 	const dependentTotalCostPerYear = bankersRounding(dependentBenefitCost * nameDiscount, 2);
+
+	const lessCostForLastPayPeriod = bankersRounding((employeeAndDependentsTotalCostPerPayPeriod * numberOfPaychecks) - employeeAndDependentsTotalCostPerYear, 2);
 
 	const calculatedEmployee = {
 		firstName: 'a',
@@ -86,4 +93,6 @@ it('calculates correct values with discount', () => {
 	assert.equal(calculatedEmployee.dependents[0].dependentTotalCostPerPayPeriod, dependentTotalCostPerPayPeriod);
 
 	assert.equal(calculatedEmployee.dependents[0].dependentTotalCostPerYear, dependentTotalCostPerYear);
+
+	assert.equal(calculatedEmployee.lessCostForLastPayPeriod, lessCostForLastPayPeriod);
 });

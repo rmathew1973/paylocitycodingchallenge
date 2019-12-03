@@ -3,8 +3,7 @@ import { Button, Navbar, Nav } from 'react-bootstrap';
 import ReactTable from 'react-table';
 import { Redirect } from 'react-router-dom';
 import { FiDelete } from 'react-icons/fi';
-import bankersRounding from 'bankers-rounding';
-import { calculateCosts, pay, numberOfPaychecks, employeeBenefitCost } from './Calculator';
+import { calculateCosts } from './Calculator';
 import Errors from '../modals/Errors';
 import DeleteConfirm from '../modals/DeleteConfirm';
 import AddDependent from './AddDependent';
@@ -13,6 +12,48 @@ import { EmployeeUrl } from '../Urls';
 import 'react-table/react-table.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Employee.css';
+/* eslint-disable react/forbid-foreign-prop-types */
+// @ts-ignore
+delete ReactTable.propTypes.TableComponent;
+// @ts-ignore
+delete ReactTable.propTypes.TheadComponent;
+// @ts-ignore
+delete ReactTable.propTypes.TbodyComponent;
+// @ts-ignore
+delete ReactTable.propTypes.TrGroupComponent;
+// @ts-ignore
+delete ReactTable.propTypes.TrComponent;
+// @ts-ignore
+delete ReactTable.propTypes.ThComponent;
+// @ts-ignore
+delete ReactTable.propTypes.TdComponent;
+// @ts-ignore
+delete ReactTable.propTypes.TfootComponent;
+// @ts-ignore
+delete ReactTable.propTypes.FilterComponent;
+// @ts-ignore
+delete ReactTable.propTypes.ExpanderComponent;
+// @ts-ignore
+delete ReactTable.propTypes.PivotValueComponent;
+// @ts-ignore
+delete ReactTable.propTypes.AggregatedComponent;
+// @ts-ignore
+delete ReactTable.propTypes.PivotComponent;
+// @ts-ignore
+delete ReactTable.propTypes.PaginationComponent;
+// @ts-ignore
+delete ReactTable.propTypes.PreviousComponent;
+// @ts-ignore
+delete ReactTable.propTypes.NextComponent;
+// @ts-ignore
+delete ReactTable.propTypes.LoadingComponent;
+// @ts-ignore
+delete ReactTable.propTypes.NoDataComponent;
+// @ts-ignore
+delete ReactTable.propTypes.ResizerComponent;
+// @ts-ignore
+delete ReactTable.propTypes.PadRowComponent;
+/* eslint-enable react/forbid-foreign-prop-types */
 
 class Employee extends Component {
 
@@ -72,16 +113,19 @@ class Employee extends Component {
       id: 0,
       firstName: '',
       lastName: '',
-      employeeTotalCostPerPayPeriod: bankersRounding(employeeBenefitCost / numberOfPaychecks, 2),
-      employeeTotalCostPerYear: bankersRounding(employeeBenefitCost, 2),
-      employeeAndDependentsTotalCostPerPayPeriod: bankersRounding(employeeBenefitCost / numberOfPaychecks, 2),
-      employeeAndDependentsTotalCostPerYear: bankersRounding(employeeBenefitCost, 2),
-      payPerPeriod: bankersRounding(pay, 2),
-      payPerYear: bankersRounding(pay * numberOfPaychecks, 2),
-      netPayPerPeriod: bankersRounding(pay - bankersRounding(employeeBenefitCost / numberOfPaychecks, 2), 2),
-      netPayPerYear: bankersRounding(bankersRounding(pay * numberOfPaychecks, 2) - employeeBenefitCost, 2),
+      employeeTotalCostPerPayPeriod: 0,
+      employeeTotalCostPerYear: 0,
+      employeeAndDependentsTotalCostPerPayPeriod: 0,
+      employeeAndDependentsTotalCostPerYear: 0,
+      payPerPeriod: 0,
+      payPerYear: 0,
+      netPayPerPeriod: 0,
+      netPayPerYear: 0,
+      lessCostForLastPayPeriod: 0,
       dependents: []
     };
+
+    calculateCosts(initialEmployee);
 
     const { id } = this.props.match.params;
 
@@ -129,7 +173,10 @@ class Employee extends Component {
     if (parseInt(id) !== 0) {
       fetch(`${EmployeeUrl}/${id}`)
         .then(res => res.json())
-        .then(employee => this.setState({ employee: employee }))
+        .then(employee => {
+          calculateCosts(employee);
+          this.setState({ employee: employee });
+        })
         .catch(e => {
           this.setState({
             showValidationErrors: true,
@@ -370,8 +417,8 @@ class Employee extends Component {
           employeeTotalCostPerYear={this.state.employee.employeeTotalCostPerYear}
           totalAmountDeductedPerYear={this.state.employee.employeeAndDependentsTotalCostPerYear}
           payPerPeriod={this.state.employee.payPerPeriod}
-          numberOfPaychecks={numberOfPaychecks}
           totalAmountDeductedPerPeriod={this.state.employee.employeeAndDependentsTotalCostPerPayPeriod}
+          lessCostForLastPayPeriod={this.state.employee.lessCostForLastPayPeriod}
         />
         <ReactTable
           ref='table'
